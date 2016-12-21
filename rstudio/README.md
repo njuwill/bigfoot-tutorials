@@ -1,6 +1,6 @@
 # rstudio
 
-RStudio Server v1.0.44 open source version is available at `http://bdapp3.ccs.miami.edu:8787`. Open this url in your browser and then login with your bigfoot user name and password.
+RStudio Server v1.0.44 open source version is available at `http://BIGFOOT_RSTUDIO_HOST:8787`. `BIGFOOT_RSTUDIO_HOST` is the host name of the rstudio node in bigfoot cluster. Open this url in your browser and then login with your bigfoot user name and password.
 
 # Home Directory
 
