@@ -59,7 +59,11 @@ hadoop fs -mv Sacramentorealestatetransactions.csv realestatetransactions.csv
 
 # Download csv loader jar file
 
-Download file `loadcsv.jar` from current folder to your local computer. Then upload it to your bigfoot home.
+Download file `loadcsv.jar` from current folder to your local computer. Then upload it to your bigfoot home. This file is also available from bigfoot bigfoot hdfs. It is located under `/project/public`. You can download it in command line to your bigfoot home.
+
+```
+hadoop fs -get /project/public/loadcsv.jar
+```
 
 # Parse and Load to Hive Table
 
