@@ -21,15 +21,31 @@ This can be done either with Linux/Mac command line, or Filezilla from Windows
 
 * from command line
 
-You can use `scp`, `sftp` or other command line data transfer commands.
+    You can use `scp`, `sftp` or other command line data transfer commands.
 
-```
-scp Sacramentorealestatetransactions.csv bigfoot.ccs.miami.edu:
-```
+    ```
+    scp Sacramentorealestatetransactions.csv bigfoot.ccs.miami.edu:
+    ```
 
 * from Windows
 
+    Filezilla is a nice application to transfer data through network on Windows. 
+    
+    Make sure you used `sftp://bigfoot.ccs.miami.edu` in target server address.
+
 ### push data to hdfs
+
+Upload data to hdfs using hadoop command.
+
+```
+hadoop fs -put Sacramentorealestatetransactions.csv
+```
+
+This will keep the same file name in hdfs. If you would like to change file name, add new name in the end of the command.
+
+```
+hadoop fs -put Sacramentorealestatetransactions.csv realestatetransactions.csv
+```
 
 ## Use Hue web interface
 
