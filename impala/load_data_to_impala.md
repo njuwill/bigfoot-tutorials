@@ -49,6 +49,14 @@ hadoop fs -put Sacramentorealestatetransactions.csv realestatetransactions.csv
 
 ## Use Hue web interface
 
+When data size is not big, another convenient way to upload data to hdfs is through Hue web interface. After login Hue web site, on top right, find `File Browser`. Click on it. Then you will find `Upload`. Click on it and select Files. Follow instruction to finish uploading. 
+
+If you want to change file name after uploading, you can do it from bigfoot command line.
+
+```
+hadoop fs -mv Sacramentorealestatetransactions.csv realestatetransactions.csv
+```
+
 # Download csv loader jar file
 
 # Parse and Load to Hive Table
