@@ -59,6 +59,55 @@ hadoop fs -mv Sacramentorealestatetransactions.csv realestatetransactions.csv
 
 # Download csv loader jar file
 
+Download file `loadcsv.jar` from current folder to your local computer. Then upload it to your bigfoot home.
+
 # Parse and Load to Hive Table
 
+Submit a Spark job to parse and load the sampe csv to impala in a new table. Here is an example.
+
+```
+spark-submit --master yarn --num-executors 40 --class LoadCsv loadcsv.jar -t realestatetransactions -d default -f ',' --quote '"' -s true Sacramentorealestatetransactions.csv
+```
+
+You can adjust the arguments depends on your source data file. This example uses 40 executors. The new table is called `realestatetransactions` in `default` database on bigfoot. This table is now available in `Hive`. The table is create in `parquet` format . You can try the following to access it from command line.
+
+```
+$ beeline -u 'jdbc:hive2://hive.cluster:10000/default;principal=hive/_HOST@CLUSTER'
+...
+0: jdbc:hive2://hive.cluster:10000/default> show tables;
+0: jdbc:hive2://hive.cluster:10000/default> select count(*) from realestatetransactions;
++------+--+
+| _c0  |
++------+--+
+| 982  |
++------+--+
+1 row selected (26.096 seconds)
+
+```
+When query finishes, run `!q` to exit from beeline.
+
 # Make Table Available in Impala
+
+Even though Impala and Hive share the same data file and meta data, you will need to notify Impala for this new table before you can use it. From command line,
+
+```
+impala-shell -k -i n01 -d default
+
+[n01:21000] > invalidate metadata realestatetransactions;
+Query: invalidate metadata realestatetransactions
+
+Fetched 0 row(s) in 0.10s
+```
+Run simple query and exit.
+```
+[n01:21000] > select count(*) from realestatetransactions;
+Query: select count(*) from realestatetransactions
++----------+
+| count(*) |
++----------+
+| 982      |
++----------+
+Fetched 1 row(s) in 3.48s
+[n01:21000] > exit;
+```
+Or do this from Hue interface. 
