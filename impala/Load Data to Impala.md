@@ -67,13 +67,22 @@ hadoop fs -get /project/public/loadcsv.jar
 
 # Parse and Load to Hive Table
 
-Submit a Spark job to parse and load the sampe csv to impala in a new table. Here is an example.
+Submit a Spark job to parse and load the sampe csv to impala in a new table. Here are two examples. Both use [databricks csv package](https://github.com/databricks/spark-csv) to parse csv files to data frame and then save it to Hive using Spark HiveContext.
+
+The first example uses a jar file, `loadcsv.ja`, which is programmed in Scala and compiled using sbt.
 
 ```
 spark-submit --master yarn --num-executors 40 --class LoadCsv loadcsv.jar -t realestatetransactions -d default -f ',' --quote '"' -s true Sacramentorealestatetransactions.csv
 ```
+The second example is programmed in Python. You can find the source code `load_csv_with_sparksql.py` from this repository. You will also need databrick csv library, `spark-csv-assembly-1.4.0.jar`, which is also available from this reposity. Once you have these two files ready, run the following command to submit spark job to load csv to Hive.
 
-You can adjust the arguments depends on your source data file. This example uses 40 executors. The new table is called `realestatetransactions` in `default` database on bigfoot. This table is now available in `Hive`. The table is create in `parquet` format . You can try the following to access it from command line.
+```
+spark-submit --master yarn-client --num-executors 5 --executor-cores 1 --jars spark-csv-assembly-1.4.0.jar load_csv_with_sparksql.py
+```
+
+You can adjust the arguments depends on your source data file. This examples above uses 40 and 5 executors. 
+
+The new table is called `realestatetransactions` in `default` database on bigfoot. This table is now available in `Hive`. The table is create in `parquet` format . You can try the following to access it from command line.
 
 ```
 $ beeline -u 'jdbc:hive2://hive.cluster:10000/default;principal=hive/_HOST@CLUSTER'
