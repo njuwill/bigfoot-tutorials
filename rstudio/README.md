@@ -23,6 +23,6 @@ Type in your bigfoot password. If no error message shows up, your kerberos authe
 Some examples in this folder require impala jdbc driver. It is available from `/project/public/impala_jdbc_2.5.34.zip` from HDFS on bigfoot. You can download and extract as the following after logging in bigfoot through ssh.
 
 ```bash
-hadoop fs -get /project/public/impala_jdbc_2.5.34.zip
-unzip impala_jdbc_2.5.34.zip
+$ hadoop fs -get /project/public/impala_jdbc_2.5.34.zip
+$ unzip impala_jdbc_2.5.34.zip
 ```
