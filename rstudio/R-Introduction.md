@@ -1,6 +1,6 @@
 # R INTRODUCTION
 
-# Creating a data set:
+# Creating a data set
 
 R works with packages that contain the techniques and functions you need. To start with some basic examples you need to know how to install and load a package. 
 
@@ -32,7 +32,7 @@ data <- data.frame(words=x1,count=x2)
 csv_data <- read.csv(name_of_file.csv,header=TRUE)
 ~~~
 
-# Reviewing a data set:
+# Reviewing a data set
 
 You can review the structure of the data set using the following functions.
 
