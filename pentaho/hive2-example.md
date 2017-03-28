@@ -64,6 +64,22 @@ Click `Tools` in top menu bar. Click `Hadoop Distributions`. Select `Cloudera CD
         * Click `Test` to confirm configuration. Click `OK` to save.
         
         
-2. configure Database connection
-3. create workflow
-4. run test job
+3. Create Sample Job
+    * Switch to `Design` tab
+    * Under `General`, click on `Start` and drag to work area on the right.
+    * Under `Scripting`, click on `SQL` and drag to work area on the right.
+    * Click on `Start` and press down `Shift` key. Drag mouse to `SQL` to create a link
+    * Double click `SQL` to configure this task.
+        * Job entry name
+        * Connection: select the database connection just defined. `hivedb` in this example.
+        * SQL Script: use the following example,
+        
+            ```sql
+            drop table if exists user_stats;
+            create table user_stats stored as parquet
+            as
+            select username, count(*) c from job_finish group by username order by c desc;
+            ```
+     * Click `Run` icon (triangle pointing to right). You will be asked to save job definition. Select your home folder and the input a new folder name.
+     * Job starts. Job running progress will be displayed in work flow graph. You can also find other job information in `Execution Results` at the bottom.
+        
