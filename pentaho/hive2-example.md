@@ -27,7 +27,8 @@ The Pentaho version on bigfoot is 6.1, released in April, 2016. You should use t
 Click `Tools` in top menu bar. Click `Hadoop Distributions`. Select `Cloudera CDH 5.5`. Restart Spoon to use the new Shim.
 
 # Congfiguration and Test Run
-1. create new job
+
+1. Configure Hadoop Cluster
 
     * In Pentaho interface, click Jobs in View tab. Right click and the select 'New'. Working space will switch to `Design` tab. 
     * Click `View` to go back. Under `Job 1`, find `Hadoop Cluster`. Right click `New Cluster`.
@@ -46,7 +47,23 @@ Click `Tools` in top menu bar. Click `Hadoop Distributions`. Select `Cloudera CD
         * Oozie section
             * Url: http://oozie.cluster:11000/oozie
         
-        Click `Test`. All test items should pass. Click `OK` to save the new cluster defination.    
+        Click `Test`. All test items should pass. Click `OK` to save the new cluster defination.
+2. Configure Hive Database
+    * Configure Hive Database connection
+        * Under `Job 1`, right click `Database Connection`. Select `New`. Database configuration window pop up.
+        * In `General` tab, set the following,
+            * Connection name: for example `hivedb`
+            * Connection Type: Hadoop Hive2
+            * Host name: hive.cluster
+            * Database name: for example `hpcjob`
+            * Port number: 10000
+            * User name and password leave as empty. not used
+        * In `Options` tab, add the following parameter.
+            * Parameter: principal
+            * Value: hive/_HOST@CLUSTER
+        * Click `Test` to confirm configuration. Click `OK` to save.
+        
+        
 2. configure Database connection
 3. create workflow
 4. run test job
