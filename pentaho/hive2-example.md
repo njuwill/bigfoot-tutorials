@@ -83,3 +83,22 @@ Click `Tools` in top menu bar. Click `Hadoop Distributions`. Select `Cloudera CD
      * Click `Run` icon (triangle pointing to right). You will be asked to save job definition. Select your home folder and the input a new folder name.
      * Job starts. Job running progress will be displayed in work flow graph. You can also find other job information in `Execution Results` at the bottom.
         
+# Check Results
+
+* Hue
+    * Login http://bigfoot-hue.ccs.miami.edu:88888 using your bigfoot user name and password.
+    * Under `Query Editor` select `Hive`
+    * Select database name, `hpcjob` in this test.
+    * You will find the new table you just created from Spoon. Click on it to check its schema.
+* Hive Beeline command line
+
+    ```
+    $ beeline -u 'jdbc:hive2://hive.cluster:10000/hpcjob;principal=hive/_HOST@CLUSTER'
+    > show tables;
+    > select * from user_stats limit 5;
+    ```
+* Spoon
+    * On top menu, select `Tools`, select `Database`, then `Explore`.
+    * Select the database connection defined earlier, `hivedb` in this example.
+    * Check schema and tables. You can even preview tables. Try the new table just created.
+    
