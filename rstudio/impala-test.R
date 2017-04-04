@@ -1,7 +1,7 @@
 # copy impala jdbc driver to your home directory
 # this sample code assume your local driver folder is /home/USERNAME/jdbc-driver# 
 # jdbc-driver is available from bigfoot hdfs storage
-# hadoop fs -get /project/hpcjob/jdbc-driver
+# hadoop fs -get /project/public/jdbc-driver
 #
 
 # load RJDBC package
