@@ -104,3 +104,8 @@ $ hadoop fs -ls
 
 Remove sample data on remote home to save space. The same sample data is available at `/project/public/PGYR15`.
 
+```
+$ hadoop fs -rm -r public/PGYR15
+$ hadoop fs -ls
+```
+
