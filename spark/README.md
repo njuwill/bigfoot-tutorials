@@ -176,6 +176,13 @@ Saving to: ‘spark-quick-start.py’
 $ cat spark-quick-start.py
 ```
 
+If the file you downloaded is not right, you can download it from `/project/public/spark-quick-start/` on `bigfoot`.
+
+```
+$ hadoop fs -get /project/public/spark-quick-start/spark-quick-start.py
+```
+
+
 Submit job to cluster.
 
 ```
