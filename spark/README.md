@@ -209,3 +209,33 @@ data 20
 ...
 ```
 The `cache()` function is used to avoid reading input files twice. 
+
+When you have big output, or you just simply need the output go to a file, instead on screen, use `saveAsTextFile` function to save results to `hdfs`. Create `spark-quick-start-hdfs-out.py` or download it from github `https://github.com/zongjunhu/bigfoot-tutorials/blob/master/spark/spark-quick-start-hdfs-output.py`. Then run as a `spark` job.
+
+```
+$ spark-submit --master yarn --num-executors 5 spark-quick-start-hdfs-output.py
+```
+
+Lots of message fly, but not word list in screen output. Check you home in hdfs.
+
+```
+$ hadoop fs -ls
+...
+drwxr-xr-x   - zhu hadoop          0 2017-04-06 12:44 quick-start-word-count
+...
+$ hadoop fs -ls quick-start-word-count
+Found 3 items
+-rw-r--r--   3 zhu hadoop          0 2017-04-06 12:44 quick-start-word-count/_SUCCESS
+-rw-r--r--   3 zhu hadoop       2084 2017-04-06 12:44 quick-start-word-count/part-00000
+-rw-r--r--   3 zhu hadoop       3559 2017-04-06 12:44 quick-start-word-count/part-00001
+```
+
+Download results and check locally.
+
+```
+$ hadoop fs -getmerge quick-start-word-count quick-start-word-count.txt
+$ cat quick-start-word-count.txt
+$ rm quick-start-word-count.txt
+$ hadoop fs -rm -r quick-start-word-count
+```
+
