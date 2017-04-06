@@ -2,7 +2,10 @@
 
 ## Prepare sample data
 
-* download `Complete 2015 Program Year Open Payments Dataset` from [cms.gov](https://www.cms.gov/OpenPayments/Explore-the-Data/Dataset-Downloads.html) to local computer
+* download `Complete 2015 Program Year Open Payments Dataset` from [cms.gov](https://www.cms.gov/OpenPayments/Explore-the-Data/Dataset-Downloads.html) to local computer. 
+
+This file is zipped, but still has big size. There a smaller version available from `bigfoot` hdfs at `/project/public/PGYR15_P011717.ZIP`. You can login `hue.ccs.miami.edu:8888` to download it to your local machine to use in this tutorial.
+
 * copy zip file to `bigfoot`
     ```
     $ scp PGYR15_P011717.ZIP bigfoot.ccs.miami.edu:
@@ -10,6 +13,10 @@
 * login to `bigfoot`
     ```
     $ ssh bigfoot.ccs.miami.edu
+    ```
+    This command will your local user account name on your local machine to login bigfoot. If you use a different account name on your local machine than `bigfoot`, add your account name in this command.
+    ```
+    $ ssh BIG_FOOT_USER_NAME@bigfoot.ccs.miami.edu
     ```
 * create a folder and unzip it
     ```
