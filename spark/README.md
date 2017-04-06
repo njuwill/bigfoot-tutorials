@@ -149,10 +149,22 @@ It will take longer time to get the prompt. This example uses 5 cpus. When you r
 
 Running task in interactive mode is good for debugging and quick testing, not good for big and complicated tasks. It will be better to have a script to include all the analysis logics and submit it to class and let job scheduler to finish task by itself. Some tasks will take hours, even days to finish.
 
-Create job script using your favoriate editor on bigfoot home, or download the script from `/project/public/`.
+Create job script `spark-quick-start.py` using your favoriate editor on bigfoot home, or download it from github.com.
 
 ```
-$ hadoop fs -get /project/public/spark-quick-start.py
+$ wget https://github.com/zongjunhu/bigfoot-tutorials/blob/master/spark/spark-quick-start.py
+
+--2017-04-06 12:03:21--  https://github.com/zongjunhu/bigfoot-tutorials/blob/master/spark/spark-quick-start.py
+Resolving github.com (github.com)... 192.30.253.112, 192.30.253.113
+Connecting to github.com (github.com)|192.30.253.112|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘spark-quick-start.py’
+
+    [ <=>                                                                                                                                                                                                 ] 34,722      --.-K/s   in 0.009s  
+
+    2017-04-06 12:03:21 (3.73 MB/s) - ‘spark-quick-start.py’ saved [34722]
+
 $ cat spark-quick-start.py
 ```
 
@@ -177,4 +189,23 @@ total number of lines counted: 762574
 17/04/06 11:57:23 INFO util.ShutdownHookManager: Deleting directory /tmp/spark-6bc7152e-936a-4296-a000-eeb500b163fc/pyspark-f118ed6b-d0e3-4e4e-bbb0-61ddada9b742
 ```
 
+Create or download `spark-quick-start-word-count.py` from github `https://github.com/zongjunhu/bigfoot-tutorials/blob/master/spark/spark-quick-start-word-count.py`. Then submit it to cluster.
 
+```
+$ spark-submit --master yarn --num-executors 5 spark-quick-start-word-count.py
+...
+17/04/06 12:32:54 INFO scheduler.DAGScheduler: ResultStage 7 (runJob at PythonRDD.scala:393) finished in 0.076 s
+17/04/06 12:32:54 INFO scheduler.DAGScheduler: Job 3 finished: runJob at PythonRDD.scala:393, took 0.172601 s
+max line length:  155
+top 5 words: 
+the 63
+of 26
+in 25
+that 21
+data 20
+17/04/06 12:32:54 INFO spark.SparkContext: Invoking stop() from shutdown hook
+17/04/06 12:32:54 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/metrics/json,null}
+17/04/06 12:32:54 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/stages/stage/kill,null}
+...
+```
+The `cache()` function is used to avoid reading input files twice. 
