@@ -149,4 +149,32 @@ It will take longer time to get the prompt. This example uses 5 cpus. When you r
 
 Running task in interactive mode is good for debugging and quick testing, not good for big and complicated tasks. It will be better to have a script to include all the analysis logics and submit it to class and let job scheduler to finish task by itself. Some tasks will take hours, even days to finish.
 
- 
+Create job script using your favoriate editor on bigfoot home, or download the script from `/project/public/`.
+
+```
+$ hadoop fs -get /project/public/spark-quick-start.py
+$ cat spark-quick-start.py
+```
+
+Submit job to cluster.
+
+```
+$ spark-submit --master yarn --num-executors 5 spark-quick-start.py
+```
+
+Again, lots of information. When job finished, you should be able find the output somewhere buried in those lines. 
+
+```
+...
+17/04/06 11:57:23 INFO cluster.YarnScheduler: Removed TaskSet 0.0, whose tasks have all completed, from pool 
+17/04/06 11:57:23 INFO scheduler.DAGScheduler: Job 0 finished: count at /home/zhu/tests/bigfoot-tutorials/spark/spark-quick-start.py:10, took 3.965641 s
+total number of lines counted: 762574
+17/04/06 11:57:23 INFO spark.SparkContext: Invoking stop() from shutdown hook
+17/04/06 11:57:23 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/metrics/json,null}
+...
+17/04/06 11:57:23 INFO util.ShutdownHookManager: Shutdown hook called
+17/04/06 11:57:23 INFO util.ShutdownHookManager: Deleting directory /tmp/spark-6bc7152e-936a-4296-a000-eeb500b163fc
+17/04/06 11:57:23 INFO util.ShutdownHookManager: Deleting directory /tmp/spark-6bc7152e-936a-4296-a000-eeb500b163fc/pyspark-f118ed6b-d0e3-4e4e-bbb0-61ddada9b742
+```
+
+
