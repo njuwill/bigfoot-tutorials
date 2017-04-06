@@ -37,68 +37,70 @@
 ## Hdfs file management from command line
 
 Practicing data management on bigfoot with hadoop commands
-    ```
-    # check contents in your home on bigfoot hdfs
-    $ hadoop fs -ls
 
-    # create temporary directory for practicing
-    $ hadoop fs -mkdir temp
+```
+# check contents in your home on bigfoot hdfs
+$ hadoop fs -ls
 
-    # copy file
-    $ hadoop fs -cp PGYR2015/OP_DTL_OWNRSHP_PGYR2015_P01172017.csv temp
+# create temporary directory for practicing
+$ hadoop fs -mkdir temp
 
-    # check copying result
-    $ hadoop fs -ls temp
+# copy file
+$ hadoop fs -cp PGYR2015/OP_DTL_OWNRSHP_PGYR2015_P01172017.csv temp
 
-    # change file name
-    $ hadoop fs -mv temp/OP_DTL_OWNRSHP_PGYR2015_P01172017.csv temp/new_file.csv
+# check copying result
+$ hadoop fs -ls temp
 
-    # copy file in saem folder
-    $ hadoop fs -cp temp/new_file.csv temp/new_file_copy.csv
+# change file name
+$ hadoop fs -mv temp/OP_DTL_OWNRSHP_PGYR2015_P01172017.csv temp/new_file.csv
 
-    # check copying results
-    $ hadoop fs -ls temp
+# copy file in saem folder
+$ hadoop fs -cp temp/new_file.csv temp/new_file_copy.csv
 
-    # download file to your bigfoot home
-    $ hadoop fs -get temp/new_file.csv
+# check copying results
+$ hadoop fs -ls temp
 
-    # check file
-    $ ls -l new_file.csv
-    $ head new_file.csv
-    $ tail new_file.csv
+# download file to your bigfoot home
+$ hadoop fs -get temp/new_file.csv
 
-    # remove temporary file from bigfoot home
-    $ rm new_file.csv
+# check file
+$ ls -l new_file.csv
+$ head new_file.csv
+$ tail new_file.csv
 
-    # download folder
-    $ hadoop fs -get temp
+# remove temporary file from bigfoot home
+$ rm new_file.csv
 
-    # check downloading results
-    $ ls -l temp
+# download folder
+$ hadoop fs -get temp
 
-    # remove temporary folder under your bigfoot home
-    $ rm -rf temp
+# check downloading results
+$ ls -l temp
 
-    # download folder to a single merged file
-    $ hadoop fs -getmerge temp temp.txt
+# remove temporary folder under your bigfoot home
+$ rm -rf temp
 
-    # check file size
-    $ ls -l temp.txt
+# download folder to a single merged file
+$ hadoop fs -getmerge temp temp.txt
 
-    # remove temporary file
-    $ rm temp.txt
+# check file size
+$ ls -l temp.txt
 
-    # remove file in hdfs
-    $ hadoop fs -rm temp/new_file.csv
+# remove temporary file
+$ rm temp.txt
 
-    # check files in hdfs temp folder
-    $ hadoop fs -ls temp
+# remove file in hdfs
+$ hadoop fs -rm temp/new_file.csv
 
-    # remove temporary folder on bigfoot hdfs home
-    $ hadoop fs -rm -r temp
-    
-    # check remote hdfs home, temporary folder should be gone
-    $ hadoop fs -ls
-    ```
-    Remove sample data on remote home to save space. The same sample data is available at `/project/public/PGYR15`.
+# check files in hdfs temp folder
+$ hadoop fs -ls temp
+
+# remove temporary folder on bigfoot hdfs home
+$ hadoop fs -rm -r temp
+
+# check remote hdfs home, temporary folder should be gone
+$ hadoop fs -ls
+```
+
+Remove sample data on remote home to save space. The same sample data is available at `/project/public/PGYR15`.
 
