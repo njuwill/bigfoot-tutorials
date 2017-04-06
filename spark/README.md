@@ -109,3 +109,22 @@ $ hadoop fs -rm -r public/PGYR15
 $ hadoop fs -ls
 ```
 
+# Spark Quick Start
+
+On `bigfoot` command line, start python `spark` shell.
+
+```
+$ pyskark
+```
+
+Wait for prompt `>>>`. Run a simple task to count number of lines of a text file from sample dataset.
+
+```
+>>> f = sc.textFile('/project/public/PGYR15/OP_PGYR2015_README_P01172017.txt')
+>>> f.count()
+...
+17/04/06 11:27:09 INFO scheduler.DAGScheduler: ResultStage 0 (count at <stdin>:1) finished in 0.509 s
+17/04/06 11:27:09 INFO scheduler.DAGScheduler: Job 0 finished: count at <stdin>:1, took 0.594611 s
+40
+>>> exit()
+```
