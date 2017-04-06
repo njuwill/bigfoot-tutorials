@@ -252,3 +252,39 @@ $ ls -l quick-start-work-count.txt
 $ cat quick-start-work-count.txt
 $ rm quick-start-work-count.txt
 ```
+
+# Spark Join Example
+
+We are going to use `Pegasus` system log to count the number of times a user group has logged in. Input files are available in `bigfoot`.
+
+* /project/public/pegasus_log_sample/
+    
+    system log samples
+
+* /project/public/pegasus_log_sample_user_group_map.txt
+
+    user group mapping
+
+Create script `spark-quick-start-join.py` or download it from github `https://github.com/zongjunhu/bigfoot-tutorials/blob/master/spark/spark-quick-start-join.py`. Submit script to cluster.
+
+```
+$ spark-submit --master yarn --num-executors 5 spark-quick-start-join.py
+...
+17/04/06 14:23:02 INFO scheduler.DAGScheduler: ResultStage 3 (collect at /home/zhu/tests/bigfoot-tutorials/spark/spark-quick-start-join.py:22) finished in 0.239 s
+17/04/06 14:23:02 INFO scheduler.DAGScheduler: Job 0 finished: collect at /home/zhu/tests/bigfoot-tutorials/spark/spark-quick-start-join.py:22, took 4.402998 s
+mihganlst 1
+cchem 2
+lin 3
+mapes 2
+iskandarani 6
+zuidema 25
+cms 6
+adr 2
+mihg 1
+lembix 12
+ccsuser 21
+17/04/06 14:23:02 INFO spark.SparkContext: Invoking stop() from shutdown hook
+17/04/06 14:23:02 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/metrics/json,null}
+```
+
+The number of times group users logged in `pegasus` is printed out on screen.
