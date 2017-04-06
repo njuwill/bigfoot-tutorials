@@ -247,7 +247,7 @@ $ spark-submit --master yarn --num-executors 5 spark-quick-start-local-output.py
 
 After job finish, the results will be saved in your current work directory as `quick-start-work-count.txt`
 
-``
+```
 $ ls -l quick-start-work-count.txt
 $ cat quick-start-work-count.txt
 $ rm quick-start-work-count.txt
