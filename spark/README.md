@@ -128,3 +128,25 @@ Wait for prompt `>>>`. Run a simple task to count number of lines of a text file
 40
 >>> exit()
 ```
+
+This `spark` session runs interactively and locally on `bigfoot` local. When input file size becomes big, a better way and it is always recommended is to run through `yarn` and cluster compute nodes. Now try a bigger file with more cpus.
+
+```
+$ pyspark --master yarn --num-executors 5
+```
+
+It will take longer time to get the prompt. This example uses 5 cpus. When you request more cpus, it may take a little more time to get all computing container set up. Once the prompt is ready, run the same task as above.
+
+```
+>>> f = sc.textFile('/project/public/PGYR15/OP_DTL_RSRCH_PGYR2015_P01172017.csv')
+>>> f.count()
+...
+17/04/06 11:35:37 INFO cluster.YarnScheduler: Removed TaskSet 0.0, whose tasks have all completed, from pool 
+17/04/06 11:35:37 INFO scheduler.DAGScheduler: Job 0 finished: count at <stdin>:1, took 4.471564 s
+762574
+>>> exit()
+```
+
+Running task in interactive mode is good for debugging and quick testing, not good for big and complicated tasks. It will be better to have a script to include all the analysis logics and submit it to class and let job scheduler to finish task by itself. Some tasks will take hours, even days to finish.
+
+ 
