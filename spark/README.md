@@ -239,3 +239,16 @@ $ rm quick-start-word-count.txt
 $ hadoop fs -rm -r quick-start-word-count
 ```
 
+When result file is small, you can get these down in a single `spark` task. You can use [spark-quick-start-local-output.py](https://github.com/zongjunhu/bigfoot-tutorials/blob/master/spark/spark-quick-start-local-output.py) for testing.
+
+```
+$ spark-submit --master yarn --num-executors 5 spark-quick-start-local-output.py
+```
+
+After job finish, the results will be saved in your current work directory as `quick-start-work-count.txt`
+
+``
+$ ls -l quick-start-work-count.txt
+$ cat quick-start-work-count.txt
+$ rm quick-start-work-count.txt
+```
