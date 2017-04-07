@@ -39,7 +39,7 @@ This file is zipped, but still has big size. There a smaller version available f
 * check data and practice
     ```
     $ hadoop fs -ls PGYR15
-    $ fsck -locations -blocks -files /project/public/PGYR15/OP_DTL_OWNRSHP_PGYR2015_P01172017.csv
+    $ hdfs fsck -locations -blocks -files /project/public/PGYR15/OP_DTL_OWNRSHP_PGYR2015_P01172017.csv
     ```
 
 ## Hdfs file management from command line
