@@ -40,6 +40,9 @@ install.packages("xlsx")
 
 library(xlsx)
 
-#excel file
+#create excel file
 write.xlsx(cpu_by_user, "cpu_report.xlsx")
+
+# read in R an excel file. You have to specify the sheet number you want to read besides the name of the file)
+read.xlsx("cpu_report.xlsx", 1)
 ```
