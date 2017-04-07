@@ -204,7 +204,7 @@ total number of lines counted: 762574
 17/04/06 11:57:23 INFO util.ShutdownHookManager: Deleting directory /tmp/spark-6bc7152e-936a-4296-a000-eeb500b163fc/pyspark-f118ed6b-d0e3-4e4e-bbb0-61ddada9b742
 ```
 
-Create or download `spark-quick-start-word-count.py` from github `https://raw.githubusercontent.com/zongjunhu/bigfoot-tutorials/master/spark/spark-quick-start-join.py``. Then submit it to cluster.
+Create or download `spark-quick-start-word-count.py` from github `https://raw.githubusercontent.com/zongjunhu/bigfoot-tutorials/master/spark/spark-quick-word-count.py`. Then submit it to cluster.
 miskand iskandarani
 
 ```
