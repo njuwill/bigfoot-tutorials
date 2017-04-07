@@ -22,7 +22,7 @@ This file is zipped, but still has big size. There a smaller version available f
     ```
     $ mkdir PGYR15
     $ cd PGYR15
-    $ unzip -l ../PGYR15_P011717.ZIP
+    $ unzip ../PGYR15_P011717.ZIP
     $ du -sm .
     6350    .
     ```
@@ -160,11 +160,11 @@ Running task in interactive mode is good for debugging and quick testing, not go
 Create job script `spark-quick-start.py` using your favoriate editor on bigfoot home, or download it from github.com.
 
 ```
-$ wget https://github.com/zongjunhu/bigfoot-tutorials/blob/master/spark/spark-quick-start.py
+$ wget https://raw.githubusercontent.com/zongjunhu/bigfoot-tutorials/master/spark/spark-quick-start.py
 
---2017-04-06 12:03:21--  https://github.com/zongjunhu/bigfoot-tutorials/blob/master/spark/spark-quick-start.py
-Resolving github.com (github.com)... 192.30.253.112, 192.30.253.113
-Connecting to github.com (github.com)|192.30.253.112|:443... connected.
+--2017-04-06 12:03:21--  https://raw.githubusercontent.com/zongjunhu/bigfoot-tutorials/master/spark/spark-quick-start.py
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 192.30.253.112, 192.30.253.113
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|192.30.253.112|:443... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: unspecified [text/html]
 Saving to: ‘spark-quick-start.py’
@@ -204,7 +204,8 @@ total number of lines counted: 762574
 17/04/06 11:57:23 INFO util.ShutdownHookManager: Deleting directory /tmp/spark-6bc7152e-936a-4296-a000-eeb500b163fc/pyspark-f118ed6b-d0e3-4e4e-bbb0-61ddada9b742
 ```
 
-Create or download `spark-quick-start-word-count.py` from github `https://github.com/zongjunhu/bigfoot-tutorials/blob/master/spark/spark-quick-start-word-count.py`. Then submit it to cluster.
+Create or download `spark-quick-start-word-count.py` from github `https://raw.githubusercontent.com/zongjunhu/bigfoot-tutorials/master/spark/spark-quick-start-join.py``. Then submit it to cluster.
+miskand iskandarani
 
 ```
 $ spark-submit --master yarn --num-executors 5 spark-quick-start-word-count.py
@@ -225,7 +226,7 @@ data 20
 ```
 The `cache()` function is used to avoid reading input files twice. 
 
-When you have big output, or you just simply need the output go to a file, instead on screen, use `saveAsTextFile` function to save results to `hdfs`. Create `spark-quick-start-hdfs-out.py` or download it from github `https://github.com/zongjunhu/bigfoot-tutorials/blob/master/spark/spark-quick-start-hdfs-output.py`. Then run as a `spark` job.
+When you have big output, or you just simply need the output go to a file, instead on screen, use `saveAsTextFile` function to save results to `hdfs`. Create `spark-quick-start-hdfs-out.py` or download it from github `https://raw.githubusercontent.com/zongjunhu/bigfoot-tutorials/master/spark/spark-quick-start-hdfs-output.py`. Then run as a `spark` job.
 
 ```
 $ spark-submit --master yarn --num-executors 5 spark-quick-start-hdfs-output.py
@@ -254,7 +255,7 @@ $ rm quick-start-word-count.txt
 $ hadoop fs -rm -r quick-start-word-count
 ```
 
-When result file is small, you can get these down in a single `spark` task. You can use [spark-quick-start-local-output.py](https://github.com/zongjunhu/bigfoot-tutorials/blob/master/spark/spark-quick-start-local-output.py) for testing.
+When result file is small, you can get these down in a single `spark` task. You can use [spark-quick-start-local-output.py](https://raw.githubusercontent.com/zongjunhu/bigfoot-tutorials/master/spark/spark-quick-start-local-output.py) for testing.
 
 ```
 $ spark-submit --master yarn --num-executors 5 spark-quick-start-local-output.py
@@ -280,7 +281,7 @@ We are going to use `Pegasus` system log to count the number of times a user gro
 
     user group mapping
 
-Create script `spark-quick-start-join.py` or download it from github `https://github.com/zongjunhu/bigfoot-tutorials/blob/master/spark/spark-quick-start-join.py`. Submit script to cluster.
+Create script `spark-quick-start-join.py` or download it from github `https://raw.githubusercontent.com/zongjunhu/bigfoot-tutorials/master/spark/spark-quick-start-join.py`. Submit script to cluster.
 
 ```
 $ spark-submit --master yarn --num-executors 5 spark-quick-start-join.py
