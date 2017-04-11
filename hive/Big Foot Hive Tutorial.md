@@ -9,6 +9,15 @@ First create folder on `bigfoot` to host sample data. Create two folders under `
 * `USERNAME_rating`
 * `USERNAME_user`
 
+On bigfoot command line,
+
+```
+$ hadoop fs -mkdir /project/public/data/USERNAME_rating
+$ hadoop fs -mkdir /project/public/data/USERNAME_user
+```
+
+Or from `Hue` web interface.
+
 There are two ways to download and transfer to `bigfoot` `hdfs`.
 
 * On local machine
@@ -19,8 +28,8 @@ There are two ways to download and transfer to `bigfoot` `hdfs`.
     ```
     $ wget http://files.grouplens.org/datasets/movielens/ml-100k.zip 
     $ unzip ml-100k.zip
-    $ hadoop fs -put u.data /project/public/data/USERNAME_rating/
-    $ hadoop fs -put u.user /project/public/data/USERNAME_user/
+    $ hadoop fs -put ml-100k/u.data /project/public/data/USERNAME_rating/
+    $ hadoop fs -put ml-100k/u.user /project/public/data/USERNAME_user/
     ```
 
 ## Create tables from `BeeLine CLI`.
@@ -82,6 +91,12 @@ $ hadoop fs -rm -r /project/public/data/USERNAME_user
 * Input table name `USERNAME_rating`
 * Select `/project/public/data/rating_USERNAME` as source file
 * Click `Next`
-* Change column names to `userid`, `moveid` and `rating` on second page
-* Continue to last page to create table
-* Repeat same procedure to create table `USERNAME_user` from source file `/project/public/data/user_USERNAME`. Change default field delimiter to '|'. Use column names `userid`, `age`, `gender`, `occupation` and `zipcode`. Change `zipcode` data type to string.
+* Accept default delimiter '\t'
+* Click `Next`
+* Change column names to `userid`, `moveid`, `rating` and `unixtime` on second page
+* Click `Create Table`
+* Repeat same procedure to create table `USERNAME_user` from source file `/project/public/data/user_USERNAME`. 
+* Change default field delimiter to `other`, then type in '|'. Click `Preview`. Click `Next`. 
+* Use column names `userid`, `age`, `gender`, `occupation` and `zipcode`. Change `zipcode` data type to string.
+* Click 'Create Table`.
+* Check left side panel, two new tables should be available.
