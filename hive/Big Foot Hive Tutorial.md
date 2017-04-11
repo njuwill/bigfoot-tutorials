@@ -34,6 +34,8 @@ There are two ways to download and transfer to `bigfoot` `hdfs`.
 
 ## Create tables from `BeeLine CLI`.
 
+We are going to create 2 sample external tables in this section.
+
 * Login `bigfoot.ccs.miami.edu` if you are not there.
 * Start `BeeLine CLI`
     
@@ -48,6 +50,7 @@ There are two ways to download and transfer to `bigfoot` `hdfs`.
     > describe USERNAME_rating;
     > describe USERNAME_user;
     ```
+    When tables created, source data files are not modified or relocated.
 * Run Queries
     ```
     > select * from USERNAME_rating limit 5;
@@ -66,14 +69,13 @@ There are two ways to download and transfer to `bigfoot` `hdfs`.
     > !q
     ```
 
-Check data files
+Since these are external tables, dropping table will not delete data files. Check data files
 
 ```
 $ hadoop fs -ls /project/public/data/USERNAME_rating
-$ hadoop fs -ls /project/public/data/USERNAME_user;
+$ hadoop fs -ls /project/public/data/USERNAME_user
 ```
-
-Move data file up one level and delete folders
+We are going to create managed tables in next section. On bigfoot, because of the access control settings, data can only be loaded to managed table from `/project/public/data`. Therefore, let's move data file up one level and delete folders. 
 ```
 $ hadoop fs -mv /project/public/data/USERNAME_rating/u.data /project/public/data/rating_USERNAME
 $ hadoop fs -rm -r /project/public/data/USERNAME_rating
@@ -100,3 +102,29 @@ $ hadoop fs -rm -r /project/public/data/USERNAME_user
 * Use column names `userid`, `age`, `gender`, `occupation` and `zipcode`. Change `zipcode` data type to string.
 * Click 'Create Table`.
 * Check left side panel, two new tables should be available.
+
+Now get two managed tables created with data loaded. Your data files under `/project/public/data` will be relocated to `/user/hive/warehouse/`. Run the following command to find your tables.
+
+```
+$ hadoop fs -ls /user/hive/warehouse
+```
+We can use them to practice SQL queries.
+
+## Transform Table File Format
+
+You can create new table from old table with new format. Run the following from `Hue` query editor or from `BeeLine CLI`. ';' is not required in `Hue` query editor.
+
+```
+create table USERNAME_rating_parquet stored as parquet as select * from USERNAME_rating;
+```
+You can run similar query as the table in `TEXTFORMAT`, or join tables between them. Once you get `parquet` formatted tables, they can be accessed from `Impala` as well.
+
+## Drop Tables
+
+After finish query, they can be dropped either from `Hue` query editor or `BeeLine CLI` with `drop` command. ';' is not required in `Hue` query editor. Table can be dropped from `Metastore Tables` on `Hue` as well.
+
+```
+drop table USERNAME_rating;
+drop table USERNAME_user;
+drop table USERNAME_rating_parquet;
+```
