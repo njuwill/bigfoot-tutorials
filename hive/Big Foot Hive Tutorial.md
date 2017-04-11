@@ -43,7 +43,7 @@ We are going to create 2 sample external tables in this section.
     $ beeline -u 'jdbc:hive2://hive.cluster:10000/default;principal=hive/_HOST@CLUSTER'
     ```
 * Create external tables  
-    ```
+    ```sql
     > create external table USERNAME_rating (userid INT, movieid INT, rating INT, unixtime STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' STORED AS TEXTFILE location '/project/public/data/USERNAME_rating';
     > create external table USERNAME_user (userid INT, age INT, gender STRING, occupation STRING, zipcode STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY '|' STORED AS TEXTFILE location '/project/public/data/USERNAME_user';
     > show tables;
@@ -52,14 +52,14 @@ We are going to create 2 sample external tables in this section.
     ```
     When tables created, source data files are not modified or relocated.
 * Run Queries
-    ```
+    ```sql
     > select * from USERNAME_rating limit 5;
     > select count(*) from USERNAME_rating;
     > select count(distinct userid) from USERNAME_rating;
     > select userid, avg(rating) c from USERNAME_rating group by userid order by c desc limit 5;
     ```
 * Drop tables
-    ```
+    ```sql
     > drop table USERNAME_rating;
     > drop table USERNAME_user;  
     ```
@@ -114,7 +114,7 @@ We can use them to practice SQL queries.
 
 You can create new table from old table with new format. Run the following from `Hue` query editor or from `BeeLine CLI`. ';' is not required in `Hue` query editor.
 
-```
+```sql
 create table USERNAME_rating_parquet stored as parquet as select * from USERNAME_rating;
 ```
 You can run similar query as the table in `TEXTFORMAT`, or join tables between them. Once you get `parquet` formatted tables, they can be accessed from `Impala` as well.
@@ -123,8 +123,33 @@ You can run similar query as the table in `TEXTFORMAT`, or join tables between t
 
 After finish query, they can be dropped either from `Hue` query editor or `BeeLine CLI` with `drop` command. ';' is not required in `Hue` query editor. Table can be dropped from `Metastore Tables` on `Hue` as well.
 
-```
+```sql
 drop table USERNAME_rating;
 drop table USERNAME_user;
 drop table USERNAME_rating_parquet;
+```
+## Collection Types
+
+The queries below tested in `hpcjob` database using `BeeLine CLI` or `Hue` query editor. To switch to `hpcjob` database from `BeeLine CLI`, run the following in a live session.
+
+```
+use hpcjob;
+```
+
+or switch in `Hue` query editor.
+
+';' is optional in query editor.
+
+```sql
+-- check table schema
+describe job_finish;
+
+-- check STRUCT column field
+select lsfrusage.utime, lsfrusage.stime from job_finish limit 5;
+
+-- count size of ARRAY column field
+select jobid, size(exechosts) from job_finish limit 5;
+
+-- use ARRAY in where condition
+select username, jobid from job_finish where array_contains(exechosts, 'n340.pegasus.edu') limit 5;
 ```
