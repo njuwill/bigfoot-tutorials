@@ -77,3 +77,27 @@ When data file is loaded from source location, it is relocated to `hive` warehou
 $ hadoop fs -ls /project/public/data/u.user
 ls: `/project/public/data/u.user': No such file or directory
 ```
+
+Similar to `hive`, `external table` is another option to create table in database. Instead of putting data file directly under `/project/public/data`, create a folder to host the the sample file and then upload file into the new folder.
+
+```
+$ hadoop fs -mkdir /project/public/data/users/
+$ hadoop fs -put ml-100k/u.user /project/public/data/users/
+```
+
+The folder name can be anything you preferred, once there is no space used in it. Then in `impala` shell session, you can create an external table as the following. The new path is used in `location` part in the command. 
+
+```sql
+-- create external table
+create table users(userid int, age int, gender string, occupation string, zip string) row format delimited fields terminated by '|' location '/project/public/data/users';
+
+-- run queries
+select count(*) from users;
+
+-- drop table
+drop table users;
+```
+
+Unlike `hive` external table,  `impala` deletes source data file and its parent folder after `external` table is dropped. Since it is external table, `impala` does not relocate source data to `hive` warehouse folder.
+
+```
