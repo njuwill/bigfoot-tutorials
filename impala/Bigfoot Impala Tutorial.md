@@ -99,5 +99,3 @@ drop table users;
 ```
 
 Unlike `hive` external table,  `impala` deletes source data file and its parent folder after `external` table is dropped. Since it is external table, `impala` does not relocate source data to `hive` warehouse folder.
-
-```
