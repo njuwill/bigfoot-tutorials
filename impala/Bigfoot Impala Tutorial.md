@@ -61,22 +61,58 @@ $ hadoop fs -tail /user/hive/warehouse/users/u.user
 909|50|F|educator|53171
 ...
 ```
+Let's copy this text file based table to a parquet based table and check its difference.
+```
+[n01:21000] > create table users_parquet stored as parquet as select * from users;
+Query: create table users_parquet stored as parquet as select * from users
++---------------------+
+| summary             |
++---------------------+
+| Inserted 943 row(s) |
++---------------------+
+Fetched 1 row(s) in 2.75s
+
+[n01:21000] > show table stats users;
+Query: show table stats users
++-------+--------+---------+--------------+-------------------+--------+-------------------+-----------------------------------------+
+| #Rows | #Files | Size    | Bytes Cached | Cache Replication | Format | Incremental stats | Location                                |
++-------+--------+---------+--------------+-------------------+--------+-------------------+-----------------------------------------+
+| -1    | 1      | 22.10KB | NOT CACHED   | NOT CACHED        | TEXT   | false             | hdfs://nameha/project/public/data/users |
++-------+--------+---------+--------------+-------------------+--------+-------------------+-----------------------------------------+
+Fetched 1 row(s) in 0.02s
+
+[n01:21000] > show table stats users_parquet;
+Query: show table stats users_parquet
++-------+--------+---------+--------------+-------------------+---------+-------------------+-------------------------------------------------+
+| #Rows | #Files | Size    | Bytes Cached | Cache Replication | Format  | Incremental stats | Location                                        |
++-------+--------+---------+--------------+-------------------+---------+-------------------+-------------------------------------------------+
+| -1    | 1      | 13.05KB | NOT CACHED   | NOT CACHED        | PARQUET | false             | hdfs://nameha/user/hive/warehouse/users_parquet |
++-------+--------+---------+--------------+-------------------+---------+-------------------+-------------------------------------------------+
+Fetched 1 row(s) in 0.01s
+
+```
+Comparing these two little tables with the same contents, `parquet` file format saves lots of space in storage.
+
 Finally, drop the table. 
 ```sql
 -- drop table
 drop table users;
+drop table users_parquet;
 ```
 And exit from `impala` shell session.
 
 ```
 [n01:21000] > exit;
 ```
+
 When data file is loaded from source location, it is relocated to `hive` warehouse folder, like managed Hive table. After table is dropped, the source file disappears from both the source folder and the warehouse folder. For example, when check source folder on hdfs, the following is expected.
 
 ```
 $ hadoop fs -ls /project/public/data/u.user
 ls: `/project/public/data/u.user': No such file or directory
 ```
+
+## External Table Test
 
 Similar to `hive`, `external table` is another option to create table in database. Instead of putting data file directly under `/project/public/data`, create a folder to host the the sample file and then upload file into the new folder.
 
