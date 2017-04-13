@@ -97,6 +97,46 @@ Fetched 1 row(s) in 0.01s
 ```
 Comparing these two little tables with the same contents, `parquet` file format saves lots of space in storage.
 
+### Access table file from Spark
+
+The new parquet table is located under `hive` warehouse folder at `/user/hive/warehouse/users_parquet`. We can run a Spark job to access this file and use `SparkSQL` to run query inside spark job. You can find the `python` source code (`read_parquet.py`) of this simple task in `github` respository. `SparkSQL` is another fast query engine for hadoop files. It has similar performance as `impala`.
+
+Run the following out side `impala` shell from `bigfoot` command line.
+
+```
+$ spark-submit --master yarn read_parquet.py
+...
+17/04/13 13:31:37 INFO cluster.YarnScheduler: Removed TaskSet 5.0, whose tasks have all completed, from pool 
+17/04/13 13:31:37 INFO scheduler.DAGScheduler: ResultStage 5 (collect at /home/zhu/tests/bigfoot-tutorials/impala/read_parquet.py:16) finished in 1.340 s
+17/04/13 13:31:37 INFO scheduler.DAGScheduler: Job 2 finished: collect at /home/zhu/tests/bigfoot-tutorials/impala/read_parquet.py:16, took 3.338160 s
+student 196
+other 105
+educator 95
+administrator 79
+engineer 67
+programmer 66
+librarian 51
+writer 45
+executive 32
+scientist 31
+artist 28
+technician 27
+marketing 26
+entertainment 18
+healthcare 16
+retired 14
+salesman 12
+lawyer 12
+none 9
+doctor 7
+homemaker 7
+17/04/13 13:31:37 INFO spark.SparkContext: Invoking stop() from shutdown hook
+17/04/13 13:31:37 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/static/sql,null}
+17/04/13 13:31:37 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/SQL/execution/json,null}
+17/04/13 13:31:37 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/SQL/execution,null}
+
+```
+
 ### Column data type modification
 ```
 [n01:21000] > describe users;
