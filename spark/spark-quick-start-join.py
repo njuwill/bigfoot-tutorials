@@ -11,7 +11,9 @@ conf.setAppName('Spark Quick Start Sample')
 sc = SparkContext(conf=conf)
 
 # (uid, ip)
-f = sc.textFile('/project/public/pegasus_log_sample/*').filter(lambda x: x.find('Accept') > 0 and x.find('root') < 0).map(lambda x: extract_user_ip(x)).cache()
+f = sc.textFile('/project/public/pegasus_log_sample/*')\
+        .filter(lambda x: x.find('Accept') > 0 and x.find('root') < 0)\
+        .map(lambda x: extract_user_ip(x)).cache() 
 
 # print user access source ip
 # access = f.collect()
@@ -26,7 +28,8 @@ user_visits = f.map(lambda x: (x[0], 1)).reduceByKey(lambda a, b: a+b)
 
 # (group, count)
 # after join (uid, (count, group))
-results = user_visits.join(user_map).map(lambda (x, a): (a[1], a[0])).reduceByKey(lambda a, b: a+b).collect()
+results = user_visits.join(user_map).map(lambda (x, a): (a[1], a[0])) \
+        .reduceByKey(lambda a, b: a+b).collect()
 
 for u in results:
     print u[0], u[1]
