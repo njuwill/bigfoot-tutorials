@@ -1,4 +1,4 @@
-# Hive Tutorial
+# Bigfoot Impala Tutorial
 
 ## Prepare Sample Data
 
