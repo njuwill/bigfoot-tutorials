@@ -42,6 +42,8 @@ select count(*) from users;
 select occupation, count(*) c from users group by occupation order by c desc;
 ```
 
+### Table file location
+
 This example creates a managed table in `hive` warehouse folder. If you check for table files before dropping table, you will see similar output like below.
 
 ```
@@ -61,6 +63,8 @@ $ hadoop fs -tail /user/hive/warehouse/users/u.user
 909|50|F|educator|53171
 ...
 ```
+### Table file format
+
 Let's copy this text file based table to a parquet based table and check its difference.
 ```
 [n01:21000] > create table users_parquet stored as parquet as select * from users;
@@ -92,6 +96,60 @@ Fetched 1 row(s) in 0.01s
 
 ```
 Comparing these two little tables with the same contents, `parquet` file format saves lots of space in storage.
+
+### Column data type modification
+```
+[n01:21000] > describe users;
+Query: describe users
++------------+--------+---------+
+| name       | type   | comment |
++------------+--------+---------+
+| userid     | int    |         |
+| age        | int    |         |
+| gender     | string |         |
+| occupation | string |         |
+| zip        | string |         |
++------------+--------+---------+
+Fetched 5 row(s) in 1.25s
+```
+
+Since `age` is `int`, we can do number comparison.
+
+```
+[n01:21000] > select userid, age, gender from users where age > 35 limit 5;
+Query: select userid, age, gender from users where age > 35 limit 5
++--------+-----+--------+
+| userid | age | gender |
++--------+-----+--------+
+| 2      | 53  | F      |
+| 6      | 42  | M      |
+| 7      | 57  | M      |
+| 8      | 36  | M      |
+| 10     | 53  | M      |
++--------+-----+--------+
+Fetched 5 row(s) in 0.56s
+```
+
+Same data file. But let's change `age` type to `string`. We can now do string comparison.
+
+```
+[n01:21000] > alter table users change age age string;
+Query: alter table users change age age string
+
+[n01:21000] > select userid, age, gender from users where age like '3%' limit 5;
+Query: select userid, age, gender from users where age like '3%' limit 5
++--------+-----+--------+
+| userid | age | gender |
++--------+-----+--------+
+| 5      | 33  | F      |
+| 8      | 36  | M      |
+| 11     | 39  | F      |
+| 17     | 30  | M      |
+| 18     | 35  | F      |
++--------+-----+--------+
+Fetched 5 row(s) in 0.52s
+```
+This trick works when table file format is text file.
 
 Finally, drop the table. 
 ```sql
