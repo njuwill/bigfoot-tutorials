@@ -42,7 +42,7 @@ diamonds_tbl <- copy_to(sc, diamonds)
 
 # Start the clock!
 ptm <- proc.time()
-test <- randomForest(price~., diamonds, method="class")
+test <- randomForest(price~., diamonds_tbl, method="class")
 # Stop the clock
 proc.time() - ptm
 
