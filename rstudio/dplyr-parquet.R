@@ -7,16 +7,17 @@ library(DBI)
 # load dplyr, a package to help data frame manipulation
 library(dplyr) 
 
-# create spark connection
+config <- spark_config()
+config$spark.executor.instances <- 40
+
+# replace USER_NAME with your bigfoot user name
 sc <- spark_connect(master = "yarn-client",
                     version = "1.6.0", 
-                    config = spark_config())
+                    config = config)
 
-# select database
-dbGetQuery(sc, "USE hpcjob")
+# read job_finish from parquet file
 
-# create table dataframe
-job_finish=tbl(sc,"job_finish")
+job_finish = spark_read_parquet(sc, "job_finish", "/user/hive/warehouse/hpcjob.db/job_finish");
 
 # create user job number report by projects
 results <- job_finish %>% 

@@ -8,7 +8,7 @@ readRenviron("/usr/lib64/R/etc/Renviron")
 library(DBI)
 
 # initialize spark context, replace USER_NAME with your bigfoot user name
-sc <- spark_connect(master = "yarn-client",version = "1.6.0", config = list(default = list(spark.yarn.principal = "USER_NAME@CLUSTER")))
+sc <- spark_connect(master = "yarn-client",version = "1.6.0")
 
 # query hive table, count finished hpc jobs
 test <- dbGetQuery(sc, 'Select count(*) from hpcjob.job_finish')
@@ -18,3 +18,5 @@ rank <- dbGetQuery(sc, 'Select username, count(*) c from hpcjob.job_finish group
 
 # barplot user ranking
 barplot(rank[[2]][1:20], names.arg=rank[[1]][1:20])
+
+spark_disconnect(sc)
