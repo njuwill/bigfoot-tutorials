@@ -38,7 +38,9 @@ On top right of the web page, there are two icons to let you logout or quick fro
 * Logout will get you out of your `RStudio Server` login session, but your R session will be kept.
 * When things go wrong, you can start a new R session without logging out. When existing R session is cancelled, you will be asked to create a new session. You will lose your resources in your old session to have a clean start.
 
-## Spark Compatible Versions
+## Spark Comments
+
+### Spark versions
 
 The standard Spark installation on `bigfoot` is version 1.6.0. It works for most of the sample cases in this tutorial. However, package `dplyr` requires Spark version 2.0.0 and above to make data frame joins. Therefore a few of the sample R script uses a separated new Spark version 2.0.2 for computing. Please make sure you pick up the right Spark version in your own tasks.
 
@@ -52,6 +54,10 @@ Sys.setenv(HADOOP_CONF_DIR="/etc/hadoop/conf")
 # comment out the configuration for standard Spark
 # readRenviron("/usr/lib64/R/etc/Renviron")
 ```
+
+### Spark executor number
+
+When Spark reads data files directly from HDFS, no matter the format of the file itself, if the file is big, usually more cpus are required to gain performance. In some of the sample R script, task asks 40 executors for computing. Since there is a hard limit on total cpu number in bigfoot, too many jobs like this will compete for resource. It is recommended not to try too many similar cases with 40 cpus at the same time on cluster. Either use a smaller number, 6 for example, or try those jobs at different time.  
 
 ## Edit R Script and Other Files
 
@@ -72,11 +78,11 @@ Here are a list of sample R scripts to for your to try big data tasks on `bigfoo
 
 * dplyr-csv.R
     
-    Open a 6G csv file through Spark and query it as a data frame. Create group counts in a box plot.
+    Open a 6G csv file through Spark and query it as a data frame. Create group counts in a box plot. 40 executors requested.
     
 * dplyr-hpc-jobs.R
 
-    Open json files and parquet database table file from Spark and join them to generate a HPC job counts report by groud id. Requires Spark 2.0.x.
+    Open json files and parquet database table file from Spark and join them to generate a HPC job counts report by groud id. Requires Spark 2.0.x. 40 executors requested.
 
 * dplyr-json-join.R
 
@@ -88,7 +94,7 @@ Here are a list of sample R scripts to for your to try big data tasks on `bigfoo
 
 * dplyr-parquet.R
 
-    Load parquet data file from Hive warehouse and process it as a data frame. Use aggregation to create HPC job report for a user by projects.
+    Load parquet data file from Hive warehouse and process it as a data frame. Use aggregation to create HPC job report for a user by projects. 40 executors requested.
     
 * dplyr-test.R
 
