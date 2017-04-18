@@ -38,6 +38,16 @@ On top right of the web page, there are two icons to let you logout or quick fro
 * Logout will get you out of your `RStudio Server` login session, but your R session will be kept.
 * When things go wrong, you can start a new R session without logging out. When existing R session is cancelled, you will be asked to create a new session. You will lose your resources in your old session to have a clean start.
 
+## Impala JDBC Driver
+
+When querying through `impala` `jdbc` connection, `impala` `jdbc` driver is required. Down the the driver from `bigfoot` hdfs to your home directory. 
+
+From bigfoot `ssh` command line, 
+
+```
+hadoop fs -get /project/public/jdbc-driver
+```
+
 ## Spark Comments
 
 ### Spark versions
