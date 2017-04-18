@@ -88,7 +88,7 @@ Here are a list of sample R scripts to for your to try big data tasks on `bigfoo
 
 * dplyr-csv.R
     
-    Open a 6G csv file through Spark and query it as a data frame. Create group counts in a box plot. 40 executors requested.
+    Open a 6G csv file through Spark and query it as a data frame. Create group counts in a bar plot. 40 executors requested.
     
 * dplyr-hpc-jobs.R
 
@@ -96,7 +96,7 @@ Here are a list of sample R scripts to for your to try big data tasks on `bigfoo
 
 * dplyr-json-join.R
 
-    Read json files with Spark and join them to get a user counts by group id. Make a box plot. This is part of the tests for `dplyr-json-join.R`. Requires Spark 2.0.x.
+    Read json files with Spark and join them to get a user counts by group id. Make a bar plot. This is part of the tests for `dplyr-json-join.R`. Requires Spark 2.0.x.
     
 * dplyr-json.R
 
@@ -112,7 +112,7 @@ Here are a list of sample R scripts to for your to try big data tasks on `bigfoo
     
 * impala-plot.R
 
-    Fast query on a single big table to create project job counting report. Make a boxplot to present the results.
+    Fast query on a single big table to create project job counting report. Make a barplot to present the results.
 
 * impala-test.R
 
@@ -120,9 +120,9 @@ Here are a list of sample R scripts to for your to try big data tasks on `bigfoo
    
 * sparklyr-test.R
 
-    Open table through Spark and run query to create project job count. Present results with box plot.
+    Open table through Spark and run query to create project job count. Present results with bar plot.
     
 * impala-hpc-job.R
 
-    Use `impala` `jdbc` driver to do a 3 table join. Create HPC job count report by groups. Present results using box plot. This is a faster version for `dplyr-hpc-jobs.R`.
+    Use `impala` `jdbc` driver to do a 3 table join. Create HPC job count report by groups. Present results using bar plot. This is a faster version for `dplyr-hpc-jobs.R`.
 
