@@ -30,4 +30,10 @@ head(groups)
 colnames(users)
 colnames(groups)
 
+# uncomment the following to write spark data frames to hdfs
+# make sure those files(folders) do not exist
+
+#spark_write_csv(users, '/project/public/data/pegasus-users.csv')
+#spark_write_csv(groups, '/project/public/data/pegasus-groups.csv')
+
 spark_disconnect(sc)

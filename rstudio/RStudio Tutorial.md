@@ -91,5 +91,7 @@ Here are a list of sample R scripts to for your to try big data tasks on `bigfoo
 
     Open table through Spark and run query to create project job count. Present results with box plot.
     
+* impala-hpc-job.R
 
+    Use `impala` `jdbc` driver to do a 3 table join. Create HPC job count report by groups. Present results using box plot. This is a faster version for `dplyr-hpc-jobs.R`.
 
