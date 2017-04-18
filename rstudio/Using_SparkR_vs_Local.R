@@ -46,4 +46,6 @@ test <- randomForest(price~., diamonds_tbl, method="class")
 # Stop the clock
 proc.time() - ptm
 
-## time running was aproximately of 22 minutes using sparkR in bdrstudio
+## time running was aproximately of 22 minutes using sparklyr in bdrstudio
+
+spark_disconnect(sc)

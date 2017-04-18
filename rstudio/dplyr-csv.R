@@ -37,5 +37,6 @@ results <- pgyr15 %>%
 # make barplot
 barplot(results[[2]], names.arg=results[[1]])
 
+# disconnect from Spark
 spark_disconnect(sc)
 

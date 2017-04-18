@@ -1,5 +1,6 @@
 library(sparklyr)
 
+# pick up right Spark version
 readRenviron("/usr/lib64/R/etc/Renviron")
 
 library(DBI)
@@ -7,19 +8,20 @@ library(DBI)
 # load dplyr, a package to help data frame manipulation
 library(dplyr) 
 
+# Spark configuration, use default executor number 2
 config <- spark_config()
 config$spark.executor.instances <- 2
 
-# replace USER_NAME with your bigfoot user name
+# connect to Spark
 sc <- spark_connect(master = "yarn-client",
                     version = "1.6.0", 
                     config = config)
 
-# read job_finish from parquet file
-
+# read pegasus users from json file 
 users = spark_read_json(sc, "users", 
                             "/project/hpcjobs/pegasus-users.json")
 
+# read pegasus groups from json file
 groups = spark_read_json(sc, "groups", 
                             "/project/hpcjobs/pegasus-groups.json")
 # print csv leading records
@@ -36,4 +38,5 @@ colnames(groups)
 #spark_write_csv(users, '/project/public/data/pegasus-users.csv')
 #spark_write_csv(groups, '/project/public/data/pegasus-groups.csv')
 
+# disconnect from Spark
 spark_disconnect(sc)

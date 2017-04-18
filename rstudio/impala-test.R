@@ -8,14 +8,24 @@
 library("RJDBC")
 
 # create driver
-drv <- JDBC(driverClass = "com.cloudera.impala.jdbc41.Driver", classPath = list.files("jdbc-driver",pattern="jar$",full.names=T), identifier.quote="`")
+drv <- JDBC(driverClass = "com.cloudera.impala.jdbc41.Driver", 
+            classPath = list.files("jdbc-driver",pattern="jar$",full.names=T), 
+            identifier.quote="`")
 
 # create connection
 conn <- dbConnect(drv, "jdbc:impala://n01.cluster:21050/hpcjob;AuthMech=1;KrbRealm=CLUSTER;KrbHostFQDN=n01.cluster;KrbServiceName=impala")
 
 # sample queries
 show_databases <- dbGetQuery(conn, "show databases")
+
+# print database list
 show_databases
 
+# query total job number
 jobs <- dbGetQuery(conn, "select count(*) from job_finish")
+
+# print job count
 jobs
+
+# disconnect from impala jdbc connection
+dbDisconnect(conn)
