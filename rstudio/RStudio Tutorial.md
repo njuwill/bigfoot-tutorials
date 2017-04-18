@@ -38,6 +38,21 @@ On top right of the web page, there are two icons to let you logout or quick fro
 * Logout will get you out of your `RStudio Server` login session, but your R session will be kept.
 * When things go wrong, you can start a new R session without logging out. When existing R session is cancelled, you will be asked to create a new session. You will lose your resources in your old session to have a clean start.
 
+## Spark Compatible Versions
+
+The standard Spark installation on `bigfoot` is version 1.6.0. It works for most of the sample cases in this tutorial. However, package `dplyr` requires Spark version 2.0.0 and above to make data frame joins. Therefore a few of the sample R script uses a separated new Spark version 2.0.2 for computing. Please make sure you pick up the right Spark version in your own tasks.
+
+In order to use the new Spark version, in R script, the following is required.
+
+```R
+# point Spark to new version
+Sys.setenv(SPARK_HOME="/opt/spark-2.0.2-bin-hadoop2.6")
+Sys.setenv(HADOOP_CONF_DIR="/etc/hadoop/conf")
+
+# comment out the configuration for standard Spark
+# readRenviron("/usr/lib64/R/etc/Renviron")
+```
+
 ## Edit R Script and Other Files
 
 On the lowser section on the right side, there is a `File` tab. Click on it to review your files on your `bigfoot` home folder. You can navigate to other sub-folders as well. You can click on A R script or other text file for editing. File will be openned on the upper `Edit` section on the left side. You can also select a file by clicking on the check box on the left to the file name. Then you are able to copy, delete or rename it.
@@ -61,11 +76,11 @@ Here are a list of sample R scripts to for your to try big data tasks on `bigfoo
     
 * dplyr-hpc-jobs.R
 
-    Open json files and parquet database table file from Spark and join them to generate a HPC job counts report by groud id.
+    Open json files and parquet database table file from Spark and join them to generate a HPC job counts report by groud id. Requires Spark 2.0.x.
 
 * dplyr-json-join.R
 
-    Read json files with Spark and join them to get a user counts by group id. Make a box plot. This is part of the tests for `dplyr-json-join.R`.
+    Read json files with Spark and join them to get a user counts by group id. Make a box plot. This is part of the tests for `dplyr-json-join.R`. Requires Spark 2.0.x.
     
 * dplyr-json.R
 
