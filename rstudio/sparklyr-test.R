@@ -13,8 +13,12 @@ sc <- spark_connect(master = "yarn-client",version = "1.6.0")
 # query hive table, count finished hpc jobs
 test <- dbGetQuery(sc, 'Select count(*) from hpcjob.job_finish')
 
-# query hive table, rank users by number of jobs
-rank <- dbGetQuery(sc, 'Select username, count(*) c from hpcjob.job_finish group by username order by c desc')
+# query through sparksql, rank job numbers by group
+rank <- dbGetQuery(sc, 'select gid, count(*) c from 
+                       (select gid, jobid from job_finish j join
+                       (select uid, gid from pegasus_users u join pegasus_groups g where u.gidnumber = g.gidnumber) a 
+                       where j.username = a.uid)
+                       b group by gid order by c desc')
 
 # barplot user ranking
 barplot(rank[[2]][1:20], names.arg=rank[[1]][1:20])

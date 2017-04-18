@@ -12,7 +12,6 @@ sc <- spark_connect(master = "yarn-client",
                     version = "1.6.0", 
                     config = spark_config())
 
-# select database
 dbGetQuery(sc, "USE hpcjob")
 
 # create table dataframe
