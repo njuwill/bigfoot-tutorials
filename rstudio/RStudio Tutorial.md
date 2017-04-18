@@ -53,3 +53,43 @@ There are two ways to run R script
 
 In batch mode, your script will be run from the beginning to the end without interruption. The lines in your script will be played sequentially in `console` section. If there is error occurs, your script will stop at the error step in `console` section and wait for your input.
 
+Here are a list of sample R scripts to for your to try big data tasks on `bigfoot`.
+
+* dplyr-csv.R
+    
+    Open a 6G csv file through Spark and query it as a data frame. Create group counts in a box plot.
+    
+* dplyr-hpc-jobs.R
+
+    Open json files and parquet database table file from Spark and join them to generate a HPC job counts report by groud id.
+
+* dplyr-json-join.R
+
+    Read json files with Spark and join them to get a user counts by group id. Make a box plot. This is part of the tests for `dplyr-json-join.R`.
+    
+* dplyr-json.R
+
+    Read json files with Spark, check data frame schema.
+
+* dplyr-parquet.R
+
+    Load parquet data file from Hive warehouse and process it as a data frame. Use aggregation to create HPC job report for a user by projects.
+    
+* dplyr-test.R
+
+    Query data base table through Spark and DBI. Generate user job count report by projects.
+    
+* impala-plot.R
+
+    Fast query on a single big table to create project job counting report. Make a boxplot to present the results.
+
+* impala-test.R
+
+   Very basic `impala` `jdbc` test for R. Show database table list and total job number count.
+   
+* sparklyr-test.R
+
+    Open table through Spark and run query to create project job count. Present results with box plot.
+    
+
+
