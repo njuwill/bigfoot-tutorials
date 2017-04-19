@@ -85,7 +85,7 @@ $ hadoop fs -rm -r /project/public/data/USERNAME_user
 
 ## Create Tables in Hue
 
-Creating tables from `Hue` is limited to users with administrator privileges. Therefore procedures in this section may not work for you. Use instruction for command line instead.
+***Creating tables from `Hue` is limited to users with administrator privileges. Therefore procedures in this section may not work for you. Use instruction for command line instead.***
 
 * Login `http://bigfoot-hue.ccs.miami.edu:8888'
 * Click on `Data Browsers` on top menu
