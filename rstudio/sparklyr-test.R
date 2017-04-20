@@ -1,14 +1,18 @@
+# point to Spark 2.0.2 on rstudio server
+Sys.setenv(SPARK_HOME="/opt/spark-2.0.2-bin-hadoop2.6")
+Sys.setenv(HADOOP_CONF_DIR="/etc/hadoop/conf")
+
 # load sparklyr package
 library(sparklyr)
 
 # update r environment (SPARK_HOME updated)
-readRenviron("/usr/lib64/R/etc/Renviron")
+#readRenviron("/usr/lib64/R/etc/Renviron")
 
 # load DBI package
 library(DBI)
 
 # initialize spark context
-sc <- spark_connect(master = "yarn-client",version = "1.6.0")
+sc <- spark_connect(master = "yarn-client",version = "2.0.0")
 
 # select database
 dbGetQuery(sc, "USE hpcjob")
