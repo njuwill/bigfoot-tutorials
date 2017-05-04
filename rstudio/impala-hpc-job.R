@@ -6,7 +6,8 @@ drv <- JDBC(driverClass = "com.cloudera.impala.jdbc41.Driver",
             classPath = list.files("jdbc-driver",pattern="jar$",full.names=T), 
             identifier.quote="`")
 
-# create connection
+# create connection to hpcjob database
+# change 'hpcjob' to to 'default' if use 'default' database
 conn <- dbConnect(drv, "jdbc:impala://n01.cluster:21050/hpcjob;AuthMech=1;KrbRealm=CLUSTER;KrbHostFQDN=n01.cluster;KrbServiceName=impala")
 
 # run impala query to generate group job number count ranking
