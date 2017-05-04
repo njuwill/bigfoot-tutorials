@@ -84,7 +84,7 @@ There are two ways to run R script
 
 In batch mode, your script will be run from the beginning to the end without interruption. The lines in your script will be played sequentially in `console` section. If there is error occurs, your script will stop at the error step in `console` section and wait for your input.
 
-Here are a list of sample R scripts to for your to try big data tasks on `bigfoot`.
+Here are a list of sample R scripts to for your to try big data tasks on `bigfoot`. Most of the examples below use ***hpcjob*** database. Please change database name to ***default*** to query tables you created in `hive` and `impala` tutorials.
 
 * dplyr-csv.R
     
