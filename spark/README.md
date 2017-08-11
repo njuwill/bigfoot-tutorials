@@ -337,3 +337,39 @@ Amazon released lots of interesting [review dataset](http://jmcauley.ucsd.edu/da
     $ hadoop fs -ls  /project/public/spark-workshop/amazon_reviews_Books_5.json
     -rw-r--r--   3 zhu hadoop 9458009255 2017-08-11 10:18 /project/public/spark-workshop/amazon_reviews_Books_5.json
     ```
+* run sample Spark Job. Result is written back to `HDFS`.
+    ```
+    $ spark-submit --master yarn --num-executors 20 amazon_book_review.py
+    ```
+* check and download results
+    ```
+    $ hadoop fs -ls amazon_book_review
+    Found 49 items
+    -rw-r--r--   3 zhu hadoop          0 2017-08-11 10:58 amazon_book_review/_SUCCESS
+    -rw-r--r--   3 zhu hadoop      58833 2017-08-11 10:58 amazon_book_review/part-00000
+    -rw-r--r--   3 zhu hadoop      69645 2017-08-11 10:58 amazon_book_review/part-00001
+    ...
+    ...
+    -rw-r--r--   3 zhu hadoop       9482 2017-08-11 10:58 amazon_book_review/part-00046
+    -rw-r--r--   3 zhu hadoop          0 2017-08-11 10:58 amazon_book_review/part-00047
+    
+    $ hadoop fs -getmerge amazon_book_review amazon_book_review.txt
+    
+    $ head amazon_book_review.txt
+    (u'Amazon Customer', 295436)
+    (u'Kindle Customer', 37961)
+    (None, 25546)
+    (u'Harriet Klausner', 23212)
+    (u'Midwest Book Review', 16090)
+    (u'Avid Reader', 6043)
+    (u'Bookreporter', 5878)
+    (u'Lisa', 4558)
+    (u'Linda', 4340)
+    (u'Jennifer', 4286)
+    ```
+* load json as table in `Bigfoot` Hive and Impala
+    ```
+    $ spark-submit --master yarn --num-executors 20 amazon_book_review.table.py
+    ```
+
+    
