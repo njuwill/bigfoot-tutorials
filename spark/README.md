@@ -272,7 +272,7 @@ $ cat quick-start-work-count.txt
 $ rm quick-start-work-count.txt
 ```
 
-# Spark Join Example
+## Spark Join Example
 
 We are going to use `Pegasus` system log to count the number of times a user group has logged in. Input files are available in `bigfoot`.
 
@@ -307,3 +307,33 @@ ccsuser 21
 ```
 
 The number of times group users logged in `pegasus` is printed out on screen.
+
+## Amazon Review Sample Data
+
+Amazon released lots of interesting [review dataset](http://jmcauley.ucsd.edu/data/amazon/) for research purpose and it is a great source to use to learn spark. Here is a sample session to use one of the review data to run a sample Spark job.
+
+* download data on `Bigfoot` to user home
+    ```
+    $ wget http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Books_5.json.gz
+    $ ls -l reviews_Books_5.json.gz
+    -rw-r--r--  1 zhu sysuser 3.1G Aug 11 01:17 reviews_Books_5.json.gz
+    ```
+* unzip file
+    ```
+    $ gunzip reviews_Books_5.json.gz
+    $ ls -lh reviews_Books_5.json
+    -rw-r--r-- 1 zhu sysuser 8.9G Aug 11 01:17 reviews_Books_5.json
+    ```
+* check json structure
+    ```
+    $ head -n 1 reviews_Books_5.json
+    ```
+    ```json
+    {"reviewerID": "A10000012B7CGYKOMPQ4L", "asin": "000100039X", "reviewerName": "Adam", "helpful": [0, 0], "reviewText": "Spiritually and mentally inspiring! A book that allows you to question your morals and will help you discover who you really are!", "overall": 5.0, "summary": "Wonderful!", "unixReviewTime": 1355616000, "reviewTime": "12 16, 2012"}
+    ```
+* upload to `Bigfoot` `HDFS`
+    ```
+    $ hadoop fs -put reviews_Books_5.json /project/public/spark-workshop/amazon_reviews_Books_5.json
+    $ hadoop fs -ls  /project/public/spark-workshop/amazon_reviews_Books_5.json
+    -rw-r--r--   3 zhu hadoop 9458009255 2017-08-11 10:18 /project/public/spark-workshop/amazon_reviews_Books_5.json
+    ```
