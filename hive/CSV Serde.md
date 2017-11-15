@@ -48,7 +48,7 @@ Now we are going to create the table and call it `movies_[your usename]`:
 ```
 .../default> create external table movies_sgs93 (movieid int, title string, genre string) row format serde 'org.apache.hadoop.hive.serde2.OpenCSVSerde' stored as textfile location '/project/public/data/movies_sgs93' tblproperties ("skip.header.line.count"="1");
 ```
-What this does is create the table with the parameters you specify that will match with data being used from the location and will also skip and commas used in between quotes.  The last part containing the line `tblproperties ("skip.header.line.count"="1")` skips the first line in the data because in this specific data we are using, the first line is just the title of the columns and is not needed.
+What this does is create the table with the parameters you specify that will match with data being used from the location and will also skip any commas used in between quotes.  The last part containing the line `tblproperties ("skip.header.line.count"="1")` skips the first line in the data because in this specific data we are using, the first line is just the title of the columns and is not needed.
 
 We can now see the table under the list of tables using
 ```
