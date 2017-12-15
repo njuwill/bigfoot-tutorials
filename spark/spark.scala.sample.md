@@ -1,6 +1,6 @@
-this example is copied from Spark quick start for [version 2.2.0](https://spark.apache.org/docs/latest/quick-start.html)
+This example is copied from Spark quick start for [version 2.2.0](https://spark.apache.org/docs/latest/quick-start.html)
 
-create folder layout
+Create folder layout
 
 ```
 mkdir sample.spark
@@ -56,3 +56,16 @@ then submit through new Spark `2.2.0`
 This job is submitted to `yarn` cluster and run on compute nodes. It asks for 2 executors and 1 core per executor. 
 
 This sample does not work for default spark, which is version 1.6.0. You should use the full absolute path to spark version 2.2.0.
+
+You need download sbt and save it to your home directory.
+
+```
+cd
+curl -O https://github.com/sbt/sbt/releases/download/v1.0.4/sbt-1.0.4.zip
+unzip sbt-1.0.4.zip
+```
+You will see a new folder `sbt` under current directory. Then you can use path `~/sbt/bin/sbt` in your sbt compiling.
+
+```
+~/sbt/bin/sbt package
+```
