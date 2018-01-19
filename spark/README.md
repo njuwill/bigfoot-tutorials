@@ -1,9 +1,5 @@
 # Spark Tutorials
 
-## Links for Workshop
-* [Sample Code session](https://docs.google.com/document/d/1bfRmMfFo5SEuNNeZaFmn4z1tvEc7pxTUF1uEzO9cgbY/edit?usp=sharing): https://docs.google.com/document/d/1bfRmMfFo5SEuNNeZaFmn4z1tvEc7pxTUF1uEzO9cgbY/edit?usp=sharing
-* [Workshop Presentation](https://docs.google.com/presentation/d/1FPtdUpJbe21UBD9LiQ4SovSIruMOBDekmKSgRzxN1Rk/edit?usp=sharing): https://docs.google.com/presentation/d/1FPtdUpJbe21UBD9LiQ4SovSIruMOBDekmKSgRzxN1Rk/edit?usp=sharing
-
 ## Prepare sample data
 
 * download `Complete 2015 Program Year Open Payments Dataset` from [cms.gov](https://www.cms.gov/OpenPayments/Explore-the-Data/Dataset-Downloads.html) to local computer. 
